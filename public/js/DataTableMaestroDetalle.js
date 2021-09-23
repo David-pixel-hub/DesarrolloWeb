@@ -22,7 +22,7 @@ $(document).ready(function() {
 
   // Main table
   var table = $('#users-table').DataTable( {
-    ajax: '/eloquent/details-data',
+    ajax: '/master-data',
     pageLength: 8,
     columns: [
       {
@@ -68,7 +68,7 @@ $(document).ready(function() {
         console.log(rowData.id)
        $('#' + id).DataTable({
           dom: "t",
-          ajax: '/eloquent/details-data/'+rowData.id,
+          ajax: '/details-data/'+rowData.id,
            // data: [rowData],
           columns: [
             {
@@ -78,12 +78,12 @@ $(document).ready(function() {
                data: null,
                defaultContent: ''
             },
-                { data: "fecha_visita", title: 'fecha visita' },
-                { data: "motivo_visita", title: 'motivo_visita' },
-                { data: "deparatamento", title: 'departamento' },
-                { data: "nombre", title: 'nombre' },
-                { data: "diagnostico", title: 'diagnostico' },
-                { data: "observacion_medica", title: 'observacion_medica' },
+                { data: "fecha_visita", title: 'Fecha visita' },
+                { data: "motivo_visita", title: 'Motivo visita' },
+                { data: "deparatamento", title: 'Departamento' },
+                { data: "nombre", title: 'Medico' },
+                { data: "diagnostico", title: 'Diagnostico' },
+                { data: "observacion_medica", title: 'Observacion' },
           ],
           scrollY: '100px',
           select: true,

@@ -41,24 +41,24 @@ class LoginController extends Controller
     protected $redirectTo;
     public function redirectTo()
     {
-        switch (Auth::user()->role) {
-            case 'EnfermeroAsilo':
+        switch (Auth::user()->id_tipo_empleado) {
+            case 1:
                 $this->redirectTo = '/EnfermeroAsilo';
                 return $this->redirectTo;
                 break;
-            case 'MedicoAsilo':
+            case 2:
                 $this->redirectTo = '/MedicoAsilo';
                 return $this->redirectTo;
                 break;
-            case 'GestionsolicitudesFundacion':
+            case 3:
                 $this->redirectTo = '/GestionsolicitudesFundacion';
                 return $this->redirectTo;
                 break;
-            case 'MedicoFundacion':
+            case 4:
                 $this->redirectTo = '/MedicoFundacion';
                 return $this->redirectTo;
                 break;
-            case 'LaboratorioFundacion':
+            case 5:
                 $this->redirectTo = '/LaboratorioFundacion';
                 return $this->redirectTo;
                 break;

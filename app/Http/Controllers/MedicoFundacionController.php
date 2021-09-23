@@ -6,8 +6,5 @@ use Illuminate\Http\Request;
 
 class MedicoFundacionController extends Controller
 {
-    public function index()
-    {
-        return view('MedicoFundacion.index');
-    }
+
 }

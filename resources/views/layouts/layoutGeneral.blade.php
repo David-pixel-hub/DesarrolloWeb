@@ -8,7 +8,6 @@
     <title>NUEVA VIDA</title>
     <!-- Styles -->
     <link rel="stylesheet" href="{{asset('css/layoutgeneral.css')}}">
-se
 </head>
 <body>
     <div id="app">
@@ -31,6 +30,9 @@ PANEL DE CONTROL
 
   <div class="nav-links">
       <a class="navbar-brand" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesion</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
   </div>
 </div>
 @yield('content')

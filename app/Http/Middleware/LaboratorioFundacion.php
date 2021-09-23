@@ -21,23 +21,24 @@ class LaboratorioFundacion
 //    }
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::check()) {                           //sino esta autenticado redirigir al login
+        if (!Auth::check()) {
             return redirect()->route('login');
         }
-        if (Auth::user()->role == 'LaboratorioFundacion') {//si se autentico correctamente y su rol es correcto entonces continuar
-            return $next($request);
-        }
-        if (Auth::user()->role == 'EnfermeroAsilo') {
+        if (Auth::user()->id_tipo_empleado == 1) {
             return redirect()->route('EnfermeroAsilo');
         }
-        if (Auth::user()->role == 'MedicoAsilo') {
+        if (Auth::user()->id_tipo_empleado == 2) {
             return redirect()->route('MedicoAsilo');
         }
-        if (Auth::user()->role == 'GestionsolicitudesFundacion') {
+        if (Auth::user()->id_tipo_empleado == 3) {
             return redirect()->route('GestionsolicitudesFundacion');
         }
-        if (Auth::user()->role == 'MedicoFundacion') {
+        if (Auth::user()->id_tipo_empleado == 4) {
             return redirect()->route('MedicoFundacion');
         }
+        if (Auth::user()->id_tipo_empleado == 5) {
+            return $next($request);
+        }
+
     }
 }

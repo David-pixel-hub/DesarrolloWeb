@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{asset('css/EnfermeroAsilo/DateTableMaestroDetalle.css')}}">
+<link rel="stylesheet" href="{{asset('css/DateTableMaestroDetalle.css')}}">
 <link href="https://nightly.datatables.net/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
 <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
@@ -52,6 +52,6 @@
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-<script src="{{asset('js/EnfermeroAsilo/DataTableMaestroDetalle.js')}}"></script>
+<script src="{{asset('js/DataTableMaestroDetalle.js')}}"></script>
 @endpush
 
