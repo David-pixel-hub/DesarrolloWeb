@@ -14,8 +14,16 @@ class GlobalDataController extends Controller
         return Datatables::of($data)
         ->make(true);
     }
-    public function Detalle($id){
-    $detalle = DB::select('exec sp_historialmedico @id='.$id);
-    return Datatables::of($detalle)->make(true);
+    public function Detalle($id)
+    {
+        $detalle = DB::select('exec sp_historialmedico @id='.$id);
+        return Datatables::of($detalle)->make(true);
+    }
+    public function GestionSolicitudesData()
+    {
+        $detalle = DB::select('exec sp_GestionSolicitudes');
+
+         return Datatables::of($detalle)->make(true);
+
     }
 }

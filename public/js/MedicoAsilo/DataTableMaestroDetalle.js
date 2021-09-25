@@ -20,6 +20,9 @@ $(document).ready(function() {
 
   // Main table
   var table = $('#users-table').DataTable( {
+            "language": {
+     url: 'dataTables.espaniol.json',
+  },
     ajax: '/master-data',
     pageLength: 9,
     columns: [
@@ -78,7 +81,7 @@ $(document).ready(function() {
             },
                 { data: "fecha_visita", title: 'Fecha visita' },
                 { data: "motivo_visita", title: 'Motivo visita' },
-                { data: "deparatamento", title: 'Departamento' },
+                { data: "deparatamento", title: 'Especialidad' },
                 { data: "nombre", title: 'Medico' },
                 { data: "diagnostico", title: 'Diagnostico' },
                 { data: "observacion_medica", title: 'Observacion' },
