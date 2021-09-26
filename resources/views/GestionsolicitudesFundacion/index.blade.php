@@ -1,92 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
-    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
-</head>
-<body class="bg-light">
-    <div class="container mt-3">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4 class="text-center">Laravel 8 Ajax CRUD Tutorial Using Datatable - MyWebTuts.com</h4>
-                    </div>
-                    <div class="col-md-12 mb-4 text-right">
-                        <a class="btn btn-success" href="javascript:void(0)" id="createNewProduct"> <i class="fas fa-plus"></i></a>
-                    </div>
-                    <div class="col-md-12">
-                        <table class="table table-hover table-bordered data-table">
-                            <thead class="bg-secondary text-white">
-                                <tr>
-                                    <th>#</th>
+<link rel="stylesheet" href="{{asset('css/DateTableMaestroDetalle.css')}}">
+<link href="https://nightly.datatables.net/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+
+
+
+@extends('layouts.layoutGeneral')
+@section('content')
+
+<div class="container">
+    <br>
+    <br>
+
+<!-- partial -->
+    <div class="container">
+        @if (count($errors) >0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        @if (\Session::has('success'))
+            <div class="alert alert-success">
+                <p>{{ \Session::get('success') }}</p>
+            </div>
+        @endif
+    </div>
+<!-- partial -->
+
+<!-- partial:index.partial.html -->
+<h1>GESTIONAR CITAS MEDICAS</h1>
+    <br>
+
+<table id="users-table" class="table table-striped table-bordered display" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+        <th>#</th>
 		<th>PACIENTE</th>
 		<th>MOTIVO VISITA</th>
 		<th>PRE DIAGNOSTICO</th>
 		<th>PSICOPATOLOGIA</th>
 		<th>ESPECIALIDAD REMITDA</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+        <th>ACCIONES</th>
+
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+        <th>#</th>
+		<th>PACIENTE</th>
+		<th>MOTIVO VISITA</th>
+		<th>PRE DIAGNOSTICO</th>
+		<th>PSICOPATOLOGIA</th>
+		<th>ESPECIALIDAD REMITDA</th>
+        <th>ACCIONES</th>
+
+    </tr>
+  </tfoot>
+  <tbody>
+
+  </tbody>
+
+</table>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">CREAR CITA MEDICA</h5>
             </div>
+            <form action="{{ url('/MedicoAsilo') }}" method="POST">
+                {{ csrf_field() }}
+            <div class="modal-body">
+            <div class="insertHere" ></div>
+                      <div class="form-group">
+                        <label>Fecha Asignada</label>
+                        <input type="text" name="motivo_visita" id="motivo_visita" class="form-control" >
+                      </div>
+
+{{--                      <div class="form-group">--}}
+{{--                          <div class="row">--}}
+{{--                              <div class="col-md-6">--}}
+{{--                                <label>Medico Asignado</label>--}}
+{{--                                <select class="form-control">--}}
+{{--                                    @foreach( $MedicosEspecializados as  $medico )--}}
+{{--                                        <option value="{{ $medico->id }}">{{ $medico->nombre}}</option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                              </div>--}}
+{{--                              </div>--}}
+{{--                      </div>--}}
+                    <button type="submit" style="float: right" class="btn btn-primary">Crear Cita</button>
+                <br>
+
+            </div>
+        </form>
+        </div>
         </div>
     </div>
 
-</body>
+</div>
 
-<script>
-    $(function(){
-        $.ajaxSetup({
-            headers:{
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        var table = $('.data-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('GestionsolicitudesFundacion') }}",
-            columns : [
-                {data:'DT_RowIndex',name:'DT_RowIndex'},
-        {data: "paciente"},
-        {data: "motivo_visita"},
-        {data: "pre_diagnostico"},
-        {data: "psicopatologia"},
-        {data: "departamentoespecialidad"},
-                {data: 'action', name: 'action', orderable: false, searchable: false},
-            ]
-        });
+@endsection
+@push('scripts')
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+<script src="{{asset('js/GestionsolicitudesFundacion/DataTableMaestroDetalle.js')}}"></script>
 
 
-        $('body').on('click', '.deleteProduct', function (){
-            // var product_id = $(this).data("id");
-            var result = confirm("Are You sure want to delete !");
-            if(result){
 
-            var product_id = $(this).data('id');
-            $.get("{{ route('GestionsolicitudesFundacion') }}" +'/cancelar/'+product_id)
-                table.draw();
-            }else{
-                return false;
-            }
-        });
-    });
-</script>
-</html>
+
+@endpush
+

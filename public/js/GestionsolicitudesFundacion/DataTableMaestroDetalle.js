@@ -20,47 +20,52 @@ $(document).ready(function() {
 
   // Main table
   var table = $('#users-table').DataTable( {
+                  processing: true,
+            serverSide: true,
             "language": {
      url: 'dataTables.espaniol.json',
   },
-    ajax: '/GestionSolicitudesData',
-    pageLength: 9,
-    columns: [
-      {
-         className: 'details-control main-table',
-         orderable: false,
-         data: null,
-         defaultContent: "",
-      },
-        {data: "id"},
-        {data: "paciente"},
-        {data: "motivo_visita"},
-        {data: "pre_diagnostico"},
-        {data: "psicopatologia"},
-        {data: "departamentoespecialidad"},
-         {
-			// adding a more info button at the end
-      "targets": -1,
-      "data": null,
-      "defaultContent": "<button type='button' class='btn btn-default'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></button><a class='btn btn-danger' onclick='return confirm(Are you sure?)' href=''.urlencode(%7B%7Broute%28%27city-delete%27%2C%20%7Bdata%3A%20%22id%22%7D%7D%7D)''><i class='fa fa-trash'></i></a>"
-         }],
+    ajax: '/GestionsolicitudesFundacion',
+    pageLength: 8,
+            columns : [
+                {data:'DT_RowIndex',name:'DT_RowIndex'},
+                {data: "paciente"},
+                {data: "motivo_visita"},
+                {data: "pre_diagnostico"},
+                {data: "psicopatologia"},
+                {data: "departamentoespecialidad"},
+                {data: 'action', name: 'action', orderable: false, searchable: false},
+            ],
     order: [[1, 'asc']],
   });
 
-
+        $('body').on('click', '.CancelarCita', function (){
+            var result = confirm("¿Esta seguro de cancelar cita medica?");
+            if(result){
+            var id_cita_medica = $(this).data('id');
+            $.get("GestionsolicitudesFundacion/cancelar/"+id_cita_medica)
+                table.draw();
+            }else{
+                return false;
+            }
+        });
 
   $('#users-table tbody').on('click', 'button', function() {
-      const data = table.row($(this).parents('tr')).data(); // getting target row data
-    $('.insertHere').html(
-      '<input type="hidden" name="id_interno"  value="'+data.id+'" class="form-control" >'
-    );
-    $('#myModal').modal('show'); // calling the bootstrap modal
-  });
+      const identificador = table.row($(this).parents('tr')).data(); // getting target row data
 
-    $('#users-table tbody').on('click', 'a', function() {
-              if(!confirm("Are You Sure to delete this"))
-      event.preventDefault();
-console.log("dentrro")
+      $('.insertHere').html(
+        // Adding and structuring the full data
+      '<input type="hidden" name="id_interno"  value="'+identificador.id+'" class="form-control" >'
+    );
+      $.get('/master-data', function (data) {
+         $('#userCrudModal').html("Edit category");
+         $('#submit').val("Edit category");
+         $('#practice_modal').modal('show');
+         // $('#color_id').val(data.data.id);
+         $('#motivo_visita').val(data.data[0].nombre);
+         console.dir(data.data[0].nombre)
+     })
+    $('#myModal').modal('show'); // calling the bootstrap modal
   });
 
 });
