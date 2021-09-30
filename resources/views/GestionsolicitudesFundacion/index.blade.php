@@ -38,6 +38,7 @@
 <table id="users-table" class="table table-striped table-bordered display" cellspacing="0" width="100%">
   <thead>
     <tr>
+{{--        7 total--}}
         <th>#</th>
 		<th>PACIENTE</th>
 		<th>MOTIVO VISITA</th>
@@ -72,14 +73,22 @@
             <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">CREAR CITA MEDICA</h5>
             </div>
-            <form action="{{ url('/MedicoAsilo') }}" method="POST">
+            <form action="{{ url('/GestionsolicitudesFundacion') }}" method="POST">
                 {{ csrf_field() }}
             <div class="modal-body">
             <div class="insertHere" ></div>
                       <div class="form-group">
-                        <label>Fecha Asignada</label>
-                        <input type="text" name="motivo_visita" id="motivo_visita" class="form-control" >
+                        <input type="hidden" name="id_medico" id="id_medico" class="form-control" >
+                        <input type="hidden" name="id_historial_medico" id="id_historial_medico" class="form-control" >
+                        <label>Medico Asignado</label>
+                        <input type="text" readonly name="medico" id="medico" class="form-control" ><br>
+                          <label>Fecha Asignada</label>
+                        <input type="text" readonly name="fechacita" id="fechacita" class="form-control" ><br>
+                          <label>Horario Asignado</label>
+                        <input type="text" readonly name="horarionuevacita" id="horarionuevacita" class="form-control" ><br>
+
                       </div>
+
 
 {{--                      <div class="form-group">--}}
 {{--                          <div class="row">--}}
@@ -93,6 +102,9 @@
 {{--                              </div>--}}
 {{--                              </div>--}}
 {{--                      </div>--}}
+
+
+
                     <button type="submit" style="float: right" class="btn btn-primary">Crear Cita</button>
                 <br>
 
@@ -110,8 +122,9 @@
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
-<script src="{{asset('js/GestionsolicitudesFundacion/DataTableMaestroDetalle.js')}}"></script>
 
+<script src="{{asset('js/GestionsolicitudesFundacion/DataTableMaestroDetalle.js')}}"></script>
+{{--<script src="{{asset('js/MedicoAsilo/DataTableMaestroDetalle.js')}}"></script>--}}
 
 
 

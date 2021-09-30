@@ -20,7 +20,8 @@ $(document).ready(function() {
 
   // Main table
   var table = $('#users-table').DataTable( {
-                  processing: true,
+
+            processing: true,
             serverSide: true,
             "language": {
      url: 'dataTables.espaniol.json',
@@ -28,6 +29,7 @@ $(document).ready(function() {
     ajax: '/GestionsolicitudesFundacion',
     pageLength: 8,
             columns : [
+                //7 data y le suma 1?
                 {data:'DT_RowIndex',name:'DT_RowIndex'},
                 {data: "paciente"},
                 {data: "motivo_visita"},
@@ -40,9 +42,10 @@ $(document).ready(function() {
   });
 
         $('body').on('click', '.CancelarCita', function (){
-            var result = confirm("¿Esta seguro de cancelar cita medica?");
+            var result = confirm("¿Esta seguro de cancelar el proceso del paciente?");
             if(result){
             var id_cita_medica = $(this).data('id');
+            // var id_especialidad = $(this).data('id_especialidad');
             $.get("GestionsolicitudesFundacion/cancelar/"+id_cita_medica)
                 table.draw();
             }else{
@@ -51,19 +54,34 @@ $(document).ready(function() {
         });
 
   $('#users-table tbody').on('click', 'button', function() {
-      const identificador = table.row($(this).parents('tr')).data(); // getting target row data
+      const identificador = table.row($(this).parents('tr')).data();
 
-      $('.insertHere').html(
-        // Adding and structuring the full data
-      '<input type="hidden" name="id_interno"  value="'+identificador.id+'" class="form-control" >'
-    );
-      $.get('/master-data', function (data) {
+    //   $('.insertHere').html(
+    //   '<input type="text" name="id_interno"  value="'+identificador.id+'" class="form-control" >'
+    // );
+
+
+      $.get('/GestionsolicitudesFundacion/CitasMedicasDisponibles/'+identificador.id_especialidad, function (data) {
          $('#userCrudModal').html("Edit category");
          $('#submit').val("Edit category");
          $('#practice_modal').modal('show');
-         // $('#color_id').val(data.data.id);
-         $('#motivo_visita').val(data.data[0].nombre);
-         console.dir(data.data[0].nombre)
+         $('#id_historial_medico').val(identificador.id);
+         $('#id_medico').val(data.data[0].id_medico);
+         $('#medico').val(data.data[0].medico);
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        today = dd + '/' + mm + '/' + yyyy;
+        if (today == data.data[0].fechacita)
+        {
+            $('#fechacita').val(data.data[0].fechacita+' (HOY)');
+        }
+        else
+        {
+            $('#fechacita').val(data.data[0].fechacita);
+        }
+          $('#horarionuevacita').val(data.data[0].horarionuevacita.slice(0,5));
      })
     $('#myModal').modal('show'); // calling the bootstrap modal
   });

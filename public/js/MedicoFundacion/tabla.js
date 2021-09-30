@@ -5,10 +5,8 @@ $(document).ready(function() {
   function getTableId(level, uniqueData) {
     // level = child level.
     // uniqueData - unique data value in table.
-
     return level + '-' + uniqueData.replace(' ', '-'); // Replace sapces with dashes
   }
-
   // Return table with id generated from row's name field
   function format(rowData, tableId) {
     // rowData - data for the table.
@@ -20,10 +18,12 @@ $(document).ready(function() {
 
   // Main table
   var table = $('#users-table').DataTable( {
+            processing: true,
+            serverSide: true,
             "language": {
      url: 'dataTables.espaniol.json',
   },
-    ajax: '/master-data',
+    ajax: '/MedicoFundacion',
     pageLength: 9,
     columns: [
       {
@@ -32,21 +32,31 @@ $(document).ready(function() {
          data: null,
          defaultContent: "",
       },
-        {data: "id"},
-        {data: "nombre"},
-        {data: "edad"},
-        {data: "sexo"},
+        {data:'DT_RowIndex',name:'DT_RowIndex'},
+        {data: "paciente"},
         {data: "psicopatologia"},
-        {data: "encargado"},
-        {data: "telefono"},
-         {
-			// adding a more info button at the end
-      "targets": -1,
-      "data": null,
-      "defaultContent": "<button type='button' class='btn btn-default'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></button>"
-    }],
+        {data: "motivo_visita"},
+        {data: "pre_diagnostico"},
+        {data: "fase"},
+        {data: 'action', name: 'action', orderable: false, searchable: false},
+    ],
     order: [[1, 'asc']],
   });
+
+
+        $('body').on('click', '.CancelarCita', function (){
+            var result = confirm("¿Esta seguro de cancelar el proceso del paciente?");
+            var fase = getTableId("1", rowData.fase);
+
+            if(result){
+
+            var id_cita_medica = $(this).data('id');
+            $.get("MedicoFundacion/cancelar/"+id_cita_medica)
+                table.draw();
+            }else{
+                return false;
+            }
+        });
   // Add event listener for for main talbe to open and close first level child details
   $('#users-table tbody').on('click', 'td.main-table', function () {
       const tr = $(this).closest('tr');
@@ -56,20 +66,15 @@ $(document).ready(function() {
        // This row is already open - close it
        row.child.hide();
        tr.removeClass('shown');
-
-       // Destroy the Child Datatable
-       $('#' + rowData.nombre.replace(' ', '-')).DataTable().destroy();
+       $('#' + rowData.paciente.replace(' ', '-')).DataTable().destroy();
      }
      else {
-
-       var id = getTableId("1", rowData.nombre);
-
-       // Open this row
+       var id = getTableId("1", rowData.paciente);
        row.child(format(rowData, id)).show();
-        console.log(rowData.id)
+
        $('#' + id).DataTable({
           dom: "t",
-          ajax: '/details-data/'+rowData.id,
+          ajax: '/details-data/'+rowData.id_interno,
            // data: [rowData],
           columns: [
             {
@@ -96,12 +101,17 @@ $(document).ready(function() {
 
   $('#users-table tbody').on('click', 'button', function() {
       const data = table.row($(this).parents('tr')).data(); // getting target row data
-      console.dir(data)
+
+    if (data.fase === 'Primera Visita') {
     $('.insertHere').html(
-			// Adding and structuring the full data
-      '<input type="hidden" name="id_interno"  value="'+data.id+'" class="form-control" >'
+        '<input type="hidden" name="id"  value="' + data.id + '" class="form-control" ><input type="hidden" name="id_interno"  value="' + data.id_interno + '" class="form-control" ><input type="hidden" name="id_visitamedica"  value="' + data.id_visitamedica + '" class="form-control" >',
     );
-    $('#myModal').modal('show'); // calling the bootstrap modal
+    $('#modalfase2').modal('show'); // calling the bootstrap modal
+}
+else{
+
+}
+
   });
 });
 

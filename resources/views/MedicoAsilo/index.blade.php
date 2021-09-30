@@ -126,6 +126,9 @@
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+
+
 <script src="{{asset('js/MedicoAsilo/DataTableMaestroDetalle.js')}}"></script>
+{{--<script src="{{asset('js/GestionsolicitudesFundacion/DataTableMaestroDetalle.js')}}"></script>--}}
 @endpush
 
