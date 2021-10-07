@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\EnfermeroAsiloController;
+use App\Http\Controllers\FarmaciaFundacionController;
 use App\Http\Controllers\GestionsolicitudesFundacionController;
 use App\Http\Controllers\GlobalDataController;
 use App\Http\Controllers\LaboratorioFundacionController;
 use App\Http\Controllers\MedicoAsiloController;
 use App\Http\Controllers\MedicoFundacionController;
+use App\Http\Controllers\RegistroController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +28,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/RegistroInterno', [RegistroController::class,'index'])->name('registro_index')->middleware('RegistroInterno');
+Route::resource('product',RegistroController::class);
+
+
 Route::get('/master-data', [GlobalDataController::class,'Maestro'])->name('Maestro')->middleware('globaldata');
 Route::get('/details-data/{id}', [GlobalDataController::class,'Detalle'])->name('Detalle')->middleware('globaldata');
 Route::get('/GestionSolicitudesData', [GlobalDataController::class,'GestionSolicitudesData'])->name('GestionSolicitudesData')->middleware('globaldata');
@@ -36,11 +42,17 @@ Route::get('/GestionsolicitudesFundacion', [GestionsolicitudesFundacionControlle
 Route::post('/GestionsolicitudesFundacion', [GestionsolicitudesFundacionController::class,'store'])->name('GestionsolicitudesFundacion')->middleware('GestionsolicitudesFundacion');
 Route::get('/GestionsolicitudesFundacion/cancelar/{id}', [GestionsolicitudesFundacionController::class,'cancelarcita'])->name('cancelarcita')->middleware('GestionsolicitudesFundacion');
 Route::get('/GestionsolicitudesFundacion/CitasMedicasDisponibles/{id_especialidad}', [GestionsolicitudesFundacionController::class,'CitasMedicasDisponibles'])->name('CitasMedicasDisponibles')->middleware('GestionsolicitudesFundacion');
-
 Route::get('/MedicoFundacion', [MedicoFundacionController::class,'index'])->name('MedicoFundacion')->middleware('MedicoFundacion');
 Route::post('/MedicoFundacionFase2', [MedicoFundacionController::class,'storefase2'])->name('storefase2')->middleware('MedicoFundacion');
 Route::post('/MedicoFundacionFase4', [MedicoFundacionController::class,'storefase4'])->name('storefase4')->middleware('MedicoFundacion');
 Route::get('/MedicoFundacion/cancelar/{id}', [MedicoFundacionController::class,'cancelarcita'])->name('MedicoFundacion_cancelarcita')->middleware('MedicoFundacion');
-
-
+Route::get('/MedicoFundacion/medicamentos', [MedicoFundacionController::class,'medicamentos'])->name('MedicoFundacion_medicamentos')->middleware('MedicoFundacion');
+Route::get('/MedicoFundacion/ReporteExamenesPacientepdf/{id}', [MedicoFundacionController::class,'ReporteExamenesPacientepdf'])->name('ReporteExamenesPacientepdf')->middleware('MedicoFundacion');
 Route::get('/LaboratorioFundacion', [LaboratorioFundacionController::class,'index'])->name('LaboratorioFundacion')->middleware('LaboratorioFundacion');
+Route::post('/LaboratorioFundacion', [LaboratorioFundacionController::class,'store'])->name('LaboratorioFundacion_store')->middleware('LaboratorioFundacion');
+Route::get('/FarmaciaFundacion', [FarmaciaFundacionController::class,'index'])->name('FarmaciaFundacion')->middleware('FarmaciaFundacion');
+Route::get('/FarmaciaFundacion/realizado/{id}', [FarmaciaFundacionController::class,'realizado'])->name('FarmaciaFundacion_realizado')->middleware('FarmaciaFundacion');
+
+
+
+//CRAR MIDLEWARE

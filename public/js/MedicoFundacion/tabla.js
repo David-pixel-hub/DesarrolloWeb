@@ -24,7 +24,7 @@ $(document).ready(function() {
      url: 'dataTables.espaniol.json',
   },
     ajax: '/MedicoFundacion',
-    pageLength: 9,
+    pageLength: 10,
     columns: [
       {
          className: 'details-control main-table',
@@ -38,6 +38,7 @@ $(document).ready(function() {
         {data: "motivo_visita"},
         {data: "pre_diagnostico"},
         {data: "fase"},
+        {data: "horario"},
         {data: 'action', name: 'action', orderable: false, searchable: false},
     ],
     order: [[1, 'asc']],
@@ -109,9 +110,18 @@ $(document).ready(function() {
     $('#modalfase2').modal('show'); // calling the bootstrap modal
 }
 else{
-
+    $link = "http://nuevavida.test/MedicoFundacion/ReporteExamenesPacientepdf/"+data.id_visitamedica
+    $('.insertHere4').html(
+         '<input type="button" value="Resultados Examenes" onclick="window.open($link)">',
+    );
+    $('.insertHere3').html(
+         '<input type="hidden" name="id"  value="' + data.id + '" class="form-control" ><input type="hidden" name="id_interno"  value="' + data.id_interno + '" class="form-control" ><input type="hidden" name="id_visitamedica"  value="' + data.id_visitamedica + '" class="form-control" >',
+    );
+    $('#modalfase4').modal('show'); // calling the bootstrap modal
 }
 
   });
+
+
 });
 

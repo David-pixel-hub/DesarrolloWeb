@@ -69,6 +69,9 @@ class Kernel extends HttpKernel
         'GestionsolicitudesFundacion' => \App\Http\Middleware\GestionsolicitudesFundacion::class,
         'MedicoFundacion' => \App\Http\Middleware\MedicoFundacion::class,
         'LaboratorioFundacion' => \App\Http\Middleware\LaboratorioFundacion::class,
+        'FarmaciaFundacion' => \App\Http\Middleware\FarmaciaFundacion::class,
+        'FarmaciaFundacion' => \App\Http\Middleware\FarmaciaFundacion::class,
+        'RegistroInterno' => \App\Http\Middleware\RegistroInterno::class,
 
         'globaldata' => \App\Http\Middleware\globaldata::class,
 

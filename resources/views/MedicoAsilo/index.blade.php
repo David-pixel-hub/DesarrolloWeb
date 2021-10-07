@@ -97,7 +97,6 @@
                                         <option name="id_especialidad_medico" value="{{ $departamento->id }}">{{ $departamento->descripcion}}</option>
                                     @endforeach
                                 </select>
-
                               </div>
                               <div class="col-md-6">
                                 <label>Enfermero Acompañante</label>
@@ -111,7 +110,6 @@
                       </div>
                     <button type="submit" style="float: right" class="btn btn-primary">Crear Solicitud</button>
                 <br>
-
             </div>
         </form>
         </div>

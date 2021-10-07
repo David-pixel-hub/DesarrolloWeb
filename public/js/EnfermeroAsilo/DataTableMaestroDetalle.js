@@ -22,6 +22,11 @@ $(document).ready(function() {
 
   // Main table
   var table = $('#users-table').DataTable( {
+            processing: true,
+            serverSide: true,
+            "language": {
+                url: 'dataTables.espaniol.json',
+            },
     ajax: '/master-data',
     pageLength: 8,
     columns: [

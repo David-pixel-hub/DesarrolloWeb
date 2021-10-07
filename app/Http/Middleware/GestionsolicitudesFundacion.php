@@ -39,6 +39,12 @@ class GestionsolicitudesFundacion
         if (Auth::user()->id_tipo_empleado == 5) {
             return redirect()->route('LaboratorioFundacion');
         }
+        if (Auth::user()->id_tipo_empleado == 6) {
+            return redirect()->route('FarmaciaFundacion');
+        }
+        if (Auth::user()->id_tipo_empleado == 7) {
+            return redirect()->route('RegistroInterno');
+        }
 
     }
 }

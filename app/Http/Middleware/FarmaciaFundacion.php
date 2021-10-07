@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LaboratorioFundacion
+class FarmaciaFundacion
 {
     /**
      * Handle an incoming request.
@@ -15,10 +15,6 @@ class LaboratorioFundacion
      * @param  \Closure  $next
      * @return mixed
      */
-//    public function handle(Request $request, Closure $next)
-//    {
-//        return $next($request);
-//    }
     public function handle(Request $request, Closure $next)
     {
         if (!Auth::check()) {
@@ -37,14 +33,13 @@ class LaboratorioFundacion
             return redirect()->route('MedicoFundacion');
         }
         if (Auth::user()->id_tipo_empleado == 5) {
-            return $next($request);
+            return redirect()->route('LaboratorioFundacion');
         }
         if (Auth::user()->id_tipo_empleado == 6) {
-            return redirect()->route('FarmaciaFundacion');
+            return $next($request);
         }
         if (Auth::user()->id_tipo_empleado == 7) {
             return redirect()->route('RegistroInterno');
         }
-
     }
 }
