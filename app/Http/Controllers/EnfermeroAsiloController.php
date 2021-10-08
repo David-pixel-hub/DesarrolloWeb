@@ -13,19 +13,18 @@ class EnfermeroAsiloController extends Controller
                 return view('EnfermeroAsilo.index');
     }
 
-   public function Maestro()
-    {
-        $data = DB::select( 'select * from VistaInternos');
-        return Datatables::of($data)
-        ->make(true);
-
-
-    }
-
-    public function Detalle($id){
-    $detalle = DB::select('exec sp_historialmedico @id='.$id);
-    return Datatables::of($detalle)->make(true);
-    }
+//   public function Maestro()
+//    {
+//        $data = DB::select( 'select * from VistaInternos');
+//        return Datatables::of($data)
+//        ->make(true);
+//    }
+//
+//    public function Detalle($id){
+//    $detalle = DB::select('exec sp_historialmedico @id='.$id);
+////    dd($detalle);
+//    return Datatables::of($detalle)->make(true);
+//    }
 
 
 }

@@ -14,7 +14,7 @@
   <thead>
     <tr>
 		<th></th>
-		<th>ID</th>
+		<th>#</th>
 		<th>NOMBRE</th>
 		<th>EDAD</th>
 		<th>SEXO</th>
@@ -26,7 +26,7 @@
   <tfoot>
     <tr>
 		<th></th>
-		<th>ID</th>
+		<th>#</th>
 		<th>NOMBRE</th>
 		<th>EDAD</th>
 		<th>SEXO</th>

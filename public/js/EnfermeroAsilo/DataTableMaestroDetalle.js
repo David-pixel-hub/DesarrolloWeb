@@ -76,13 +76,6 @@ $(document).ready(function() {
           ajax: '/details-data/'+rowData.id,
            // data: [rowData],
           columns: [
-            {
-               className: 'details-control child-table',
-               title: '',
-               orderable: false,
-               data: null,
-               defaultContent: ''
-            },
                 { data: "fecha_visita", title: 'Fecha visita' },
                 { data: "motivo_visita", title: 'Motivo visita' },
                 { data: "deparatamento", title: 'Especialidad' },
@@ -90,8 +83,8 @@ $(document).ready(function() {
                 { data: "diagnostico", title: 'Diagnostico' },
                 { data: "observacion_medica", title: 'Observacion' },
           ],
-          scrollY: '100px',
-          select: true,
+          // scrollY: '200px',
+          // select: true,
        });
 
        tr.addClass('shown');

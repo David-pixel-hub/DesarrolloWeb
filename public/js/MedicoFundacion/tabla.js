@@ -92,8 +92,8 @@ $(document).ready(function() {
                 { data: "diagnostico", title: 'Diagnostico' },
                 { data: "observacion_medica", title: 'Observacion' },
           ],
-          scrollY: '100px',
-          select: true,
+          // scrollY: '100px',
+          // select: true,
        });
 
        tr.addClass('shown');
@@ -112,7 +112,7 @@ $(document).ready(function() {
 else{
     $link = "http://nuevavida.test/MedicoFundacion/ReporteExamenesPacientepdf/"+data.id_visitamedica
     $('.insertHere4').html(
-         '<input type="button" value="Resultados Examenes" onclick="window.open($link)">',
+         '<input type="button" class="btn btn-primary" value="Resultados Examenes" onclick="window.open($link)">',
     );
     $('.insertHere3').html(
          '<input type="hidden" name="id"  value="' + data.id + '" class="form-control" ><input type="hidden" name="id_interno"  value="' + data.id_interno + '" class="form-control" ><input type="hidden" name="id_visitamedica"  value="' + data.id_visitamedica + '" class="form-control" >',
