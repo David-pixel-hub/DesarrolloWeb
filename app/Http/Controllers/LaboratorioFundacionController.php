@@ -34,6 +34,7 @@ class LaboratorioFundacionController extends Controller
         ]);
 
         $data = DB::select('execute sp_RegistrarExamenPacienteYCrearCita ?, ?, ?', [$request->id_examen_paciente, $request->resultado, $request->id_visita_medica]);
+
         if ($data[0]->correo_encargado == '') {
             return redirect('/LaboratorioFundacion')->with('success', 'El resultado del examen ha sido guardado correctamente');
         }
